@@ -1,0 +1,61 @@
+version: "3.8"
+
+services:
+  # MongoDB Service
+  mongo:
+    image: mongo:latest
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    environment:
+      MONGO_INITDB_DATABASE: pusatoleholeh
+
+  # Backend Service
+  backend:
+    build: ./backend
+    container_name: backend
+    ports:
+      - "5000:5000"
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/pusatoleholeh
+      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
+      - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
+      - SESSION_SECRET=${SESSION_SECRET}
+      - JWT_SECRET=${JWT_SECRET}
+      - SHOP_UPLOAD_PATH=${SHOP_UPLOAD_PATH}
+      - PRODUCT_UPLOAD_PATH=${PRODUCT_UPLOAD_PATH}
+      - USER_UPLOAD_PATH=${USER_UPLOAD_PATH}
+      - HERO_UPLOAD_PATH=${HERO_UPLOAD_PATH}
+      - ARTICLE_UPLOAD_PATH=${ARTICLE_UPLOAD_PATH}
+      - CATEGORY_UPLOAD_PATH=${CATEGORY_UPLOAD_PATH}
+      - REVIEW_UPLOAD_PATH=${REVIEW_UPLOAD_PATH}
+      - API_BASE_URL=${API_BASE_URL}
+      - CDN_BASE_URL=${CDN_BASE_URL}
+      - API_PORT=${API_PORT}
+      - CDN_PORT=${CDN_PORT}
+    depends_on:
+      - mongo
+
+  # Frontend Service (React App)
+  frontend:
+    build: ./frontend
+    container_name: frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+  # Admin Dashboard Service (Vite App)
+  admin-frontend:
+    build: ./admin-frontend
+    container_name: admin-frontend
+    ports:
+      - "81:80"
+    depends_on:
+      - backend
+
+# Volumes for MongoDB
+volumes:
+  mongo-data:
