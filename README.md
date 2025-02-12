@@ -33,7 +33,7 @@ The project uses MongoDB as the database and is fully containerized using Docker
 ```bash
 git clone https://github.com/Anemonastrum/pusatoleholeh-docker.git
 cd pusatoleholeh-docker
-bash ./setup.sh
+sudo bash ./setup.sh
 ```
 ( Please adjust the .env first before running the script )
 
