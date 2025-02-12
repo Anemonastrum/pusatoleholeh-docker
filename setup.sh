@@ -97,8 +97,8 @@ copy_docker_files() {
 
   # Copy frontend files
   if [ -d "Dockerfile/frontend" ]; then
-    cp Dockerfile/frontend/Dockerfile frontend/
-    cp Dockerfile/frontend/nginx.conf frontend/
+    cp Dockerfile/frontend/Dockerfile pusatoleholeh-frontend/
+    cp Dockerfile/frontend/nginx.conf pusatoleholeh-frontend/
     echo "Copied frontend Dockerfile and Nginx configuration."
   else
     echo "Frontend Dockerfile directory not found."
@@ -106,7 +106,7 @@ copy_docker_files() {
 
   # Copy backend files
   if [ -d "Dockerfile/backend" ]; then
-    cp Dockerfile/backend/Dockerfile backend/
+    cp Dockerfile/backend/Dockerfile pusatoleholeh-backend/
     echo "Copied backend Dockerfile."
   else
     echo "Backend Dockerfile directory not found."
