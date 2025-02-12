@@ -45,6 +45,9 @@ services:
     container_name: frontend
     ports:
       - "80:80"
+    environment:
+      - REACT_APP_API_BASE_URL=${REACT_APP_API_BASE_URL}
+      - REACT_APP_CDN_BASE_URL=${REACT_APP_CDN_BASE_URL}
     depends_on:
       - backend
 
@@ -54,6 +57,9 @@ services:
     container_name: admin-frontend
     ports:
       - "81:80"
+    environment:
+      - VITE_CDN_URL=${VITE_CDN_URL}
+      - VITE_API_URL=${VITE_CDN_URL}
     depends_on:
       - backend
 
