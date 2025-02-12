@@ -1,4 +1,4 @@
-version: "3.8"
+version: "3.3"
 
 services:
   # MongoDB Service
@@ -14,10 +14,11 @@ services:
 
   # Backend Service
   backend:
-    build: ./backend
+    build: ./pusatoleholeh-backend
     container_name: backend
     ports:
-      - "5000:5000"
+      - "8000:8000"
+      - "9000:9000"
     environment:
       - MONGO_URI=mongodb://mongo:27017/pusatoleholeh
       - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
@@ -40,7 +41,7 @@ services:
 
   # Frontend Service (React App)
   frontend:
-    build: ./frontend
+    build: ./pusatoleholeh-frontend
     container_name: frontend
     ports:
       - "80:80"
@@ -49,7 +50,7 @@ services:
 
   # Admin Dashboard Service (Vite App)
   admin-frontend:
-    build: ./admin-frontend
+    build: ./pusatoleholeh-admindashboard
     container_name: admin-frontend
     ports:
       - "81:80"
